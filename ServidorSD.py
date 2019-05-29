@@ -100,11 +100,13 @@ class Cli:
         self.addr = addr
         self.ide = ide
 
-        enviarEspecial()
+        msg = bytes(ide)
+        self.conn.send(msg) # enviarEspecial()
         start_new_thread(ReceberMSG)
     
     def enviarEspecial():
-        conn.send("Cliente"+ ide +".".encode('UTF-8'))
+        msg = bytes(ide)
+        self.conn.send(msg)
 
     def receberMSG():
         while True:
