@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 '''
-    ALUNO: Marcos André Azevedo de Assis
-    DISCIPLINA: Redes de Computadores
-    TRABALHO: Chat Cliente/Servidor com Socket usando modeldo TCP.
-    DATA: 03/10/2018
-    Python versão 3.7
+    ALUNOS: Marcos André Azevedo de Assis e Althierfson Tullio Azevedo de Lima.
+    TRABALHO: Chat Cliente/Servidor MultThread com Socket usando modeldo TCP.
+    DISCIPLINA: Sistemas Distribuídos.
+    Python versão: 3.7.
+    DATA: 28/05/2019.
 '''
+from _thread import *
 from socket import *
 import time
-from _thread import *
 
 def endereco(): # Pede o IP e porta de destino
     print('\t CLIENTE')
@@ -31,8 +31,8 @@ def tentarConexao(ip, porta, s):
             break
         except:
             print('Não há servidor em: ', ip + ' : ' + str(porta))
-            print('Tentando novamente em 5 segundos\n')
-            time.sleep(5)
+            print('Tentando novamente em 1 segundos\n')
+            time.sleep(1)
 
 def enviar(s):
     while True:
@@ -51,8 +51,8 @@ def enviar(s):
                 start_new_thread(receber,(s,))
         except:
             print('\nAlgo aconteceu')
-            print('Tente em 5 segundos\n')
-            time.sleep(5)
+            print('Tente em 1 segundos\n')
+            time.sleep(1)
 
 def receber(s):
     while True:
@@ -61,9 +61,9 @@ def receber(s):
             print(reply.decode('UTF-8'))
             break
         except:
-            print('\nNão pode receber resposta')
-            print('Tente em 5 segundos\n')
-            time.sleep(5)
+            print('\nNão foi possível receber resposta')
+            print('Tente em 1 segundos\n')
+            time.sleep(1)
 
 def receberEspecial(s):
     global client
@@ -77,14 +77,12 @@ def main():
     s = criarSocket()
     tentarConexao(ip, porta, s)
     receberEspecial(s)
-    print('\nConexão com o Servidor estabilizada!\nO Servidor é: ', ip + ' : ' + str(porta)+ '\n')
+    print('\nConexão com o Servidor estabelecida!\nServidor: ', ip + ' : ' + str(porta)+ '\n')
     print('Escreva suas mensagens:\n')
     start_new_thread(enviar,(s,))
     while exit != True:
         pass
     print("\nDesculpe, algo deu errado! Você perdeu a conexão com o servidor.")
     print("Fechando a janela em 5 segundos.")
-    time.sleep(10)
+    time.sleep(5)
 main()
-
-
