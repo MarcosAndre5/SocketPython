@@ -4,7 +4,6 @@ import sys
 import pickle
 
 class Servidor():
-	"""docstring for Servidor"""
 	def __init__(self, host="localhost", port=4000):
 
 		self.clientes = []
@@ -32,7 +31,7 @@ class Servidor():
 				pass
 
 
-	def msg_to_all(self, msg, cliente):
+	def msg_to_all(self, msg, cliente, id):
 		for c in self.clientes:
 			try:
 				if c != cliente:
@@ -58,7 +57,7 @@ class Servidor():
 					try:
 						data = c.recv(1024)
 						if data:
-							self.msg_to_all(data,c)
+							self.msg_to_all(data, c, id)
 					except:
 						pass
 

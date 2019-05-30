@@ -4,7 +4,6 @@ import sys
 import pickle
 
 class Cliente():
-	"""docstring for Cliente"""
 	def __init__(self, host="localhost", port=4000):
 		
 		self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -15,9 +14,13 @@ class Cliente():
 		msg_recv.daemon = True
 		msg_recv.start()
 
+		print("----- Bem vindo ao Chat -----")
+		nome = input("Digite seu nome: ")
+
 		while True:
 			msg = input('->')
 			if msg != 'sair':
+				msg = nome +": "+ msg
 				self.send_msg(msg)
 			else:
 				self.sock.close()
