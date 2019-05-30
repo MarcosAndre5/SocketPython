@@ -17,12 +17,15 @@ class Cliente():
 		print("----- Bem vindo ao Chat -----")
 		nome = input("Digite seu nome: ")
 
+		self.send_msg(nome +" entrou no chat.")
+
 		while True:
 			msg = input('->')
 			if msg != 'sair':
 				msg = nome +": "+ msg
 				self.send_msg(msg)
 			else:
+				self.send_msg(nome +" saio do chat.")
 				self.sock.close()
 				sys.exit()
 
